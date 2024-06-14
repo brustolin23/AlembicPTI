@@ -1,16 +1,27 @@
-# This is a sample Python script.
+def remove_null_bytes(file_path):
+    with open(file_path, 'rb') as f:
+        content = f.read()
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    cleaned_content = content.replace(b'\x00', b'')
+
+    with open(file_path, 'wb') as f:
+        f.write(cleaned_content)
+
+    print(f"Null bytes removed from {file_path}")
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Remover bytes nulos do arquivo models.py
+remove_null_bytes('models.py')
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Verificar novamente se os bytes nulos foram removidos
+def check_for_null_bytes(file_path):
+    with open(file_path, 'rb') as f:
+        content = f.read()
+        if b'\x00' in content:
+            print(f"Null byte found in {file_path}")
+        else:
+            print(f"No null byte found in {file_path}")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+check_for_null_bytes('models.py')
