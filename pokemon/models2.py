@@ -60,3 +60,18 @@ class TbAbility(Base):
     ablt_id = Column(Integer, primary_key=True)
     ablt_name = Column(String(30), nullable=False)
     ablt_effect = Column(String(100), nullable=False)
+
+class TbMove(Base):
+    __tablename__ = 'tb_move'
+
+    move_id = Column(Integer, primary_key=True)
+    move_name = Column(String(20), nullable=False)
+    move_type = Column(ForeignKey("tb_type.type_id"))
+    move_category = Column(Integer)
+    move_power = Column(Integer)
+    move_accuracy = Column(Integer)
+    move_basePP = Column(Integer)
+    move_description = Column(String(100), nullable=False)
+    move_effect = Column(String(100), nullable=False)
+
+
