@@ -14,6 +14,10 @@ class TbPokemon(Base):
     poke_secondaryType = Column(ForeignKey("tb_type.type_id"))
     poke_height = Column(Float, nullable=False)
     poke_weight = Column(Float, nullable=False)
+    poke_baseStats = Column(ForeignKey("tb_status.stat_id"))
+    poke_primaryAbility = Column(ForeignKey("tb_ability.ablt_id"))
+    poke_secondaryAbility = Column(ForeignKey("tb_ability.ablt_id"))
+    poke_hiddenAbility = Column(ForeignKey("tb_ability.ablt_id"))
     poke_picture = Column(String(10), nullable=False)
 
 class TbType(Base):
@@ -34,6 +38,25 @@ class TbTypeAdvantage(Base):
     __tablename__ = 'tb_typeAdvantage'
 
     tyAd_id = Column(Integer, primary_key=True)
-    tyAd_attackType = Column(Integer)
-    tyAd_defenseType = Column(Integer)
-    tyAd_typeAdvantage = Column(Integer)
+    tyAd_attackType = Column(ForeignKey("tb_type.type_id"))
+    tyAd_defenseType = Column(ForeignKey("tb_type.type_id"))
+    tyAd_typeAdvantage = Column(ForeignKey("tb_combatAdvantage.cmAd_id"))
+
+class TbStats(Base):
+    __tablename__ = 'tb_status'
+
+    stat_id = Column(Integer, primary_key=True)
+    stat_hp = Column(Integer, nullable=False)
+    stat_attack = Column(Integer, nullable=False)
+    stat_defense = Column(Integer, nullable=False)
+    stat_spAttack = Column(Integer, nullable=False)
+    stat_spDefense = Column(Integer, nullable=False)
+    stat_speed = Column(Integer, nullable=False)
+
+
+class TbAbility(Base):
+    __tablename__ = 'tb_ability'
+
+    ablt_id = Column(Integer, primary_key=True)
+    ablt_name = Column(String(30), nullable=False)
+    ablt_effect = Column(String(100), nullable=False)
