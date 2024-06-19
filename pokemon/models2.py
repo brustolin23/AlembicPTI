@@ -74,4 +74,18 @@ class TbMove(Base):
     move_description = Column(String(100), nullable=False)
     move_effect = Column(String(100), nullable=False)
 
+class TbLearnByLevelUp(Base):
+    __tablename__ = 'tb_learnByLevelUp'
+
+    LBLU_id = Column(Integer, primary_key=True)
+    LBLU_pokemon = Column(ForeignKey("tb_pokemon.poke_registerDex"))
+    LBLU_move = Column(ForeignKey("tb_move.move_id"))
+    LBLU_level = Column(Integer)
+
+class TbCanLearn(Base):
+    __tablename__ = 'tb_canLearn'
+
+    canL_id = Column(Integer, primary_key=True)
+    canL_pokemon = Column(ForeignKey("tb_pokemon.poke_registerDex"))
+    canL_move = Column(ForeignKey("tb_move.move_id"))
 
